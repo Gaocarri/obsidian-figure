@@ -22,6 +22,14 @@ const StyledLink = styled(NavLink)`
   }
 `
 
+const Login = styled.div`
+  margin-left: auto;
+`;
+
+const Button = styled.button`
+  margin-left: 10px;
+`;
+
 
 function Component() {
   return (<Header>
@@ -31,6 +39,14 @@ function Component() {
       <StyledLink to="/history">历史</StyledLink>
       <StyledLink to="/about">关于我</StyledLink>
     </nav>
+    <Login>
+      <Button>
+        <StyledLink to="/login">登录</StyledLink>
+      </Button>
+      <Button>
+        <StyledLink to="/register">注册</StyledLink>
+      </Button>
+    </Login>
   </Header>)
 }
 
