@@ -17,16 +17,16 @@ const Title = styled.h1`
 
 const layout = {
   labelCol: {
-    span: 4,
+    span: 6,
   },
   wrapperCol: {
-    span: 20,
+    span: 18,
   },
 };
 const tailLayout = {
   wrapperCol: {
-    offset: 4,
-    span: 20,
+    offset: 6,
+    span: 18,
   },
 };
 
@@ -38,6 +38,20 @@ const Component = () => {
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
+
+  // 验证用户名
+  const validateUsername = (rule, value) => {
+    if (/\W/.test(value)) return Promise.reject('只能是数字，字母，下划线')
+    if (value.length < 4 || value.length > 10) return Promise.reject('长度为4~10个字符')
+    Promise.resolve()
+  }
+  // 确认密码
+  const validateConfirm = ({ getFieldValue }) => ({
+    validator(rule, value) {
+      if (getFieldValue('password') === value) return Promise.resolve()
+      else return Promise.reject('两次密码不一致')
+    }
+  })
 
   return (
     <Wrapper>
@@ -56,6 +70,9 @@ const Component = () => {
               required: true,
               message: '请输入用户名',
             },
+            {
+              validator: validateUsername
+            }
           ]}
         >
           <Input />
@@ -69,6 +86,14 @@ const Component = () => {
               required: true,
               message: '请输入密码',
             },
+            {
+              min: 4,
+              message: '最少4个字符'
+            },
+            {
+              max: 10,
+              message: '最大10个字符'
+            }
           ]}
         >
           <Input.Password />
@@ -76,12 +101,13 @@ const Component = () => {
 
         <Form.Item
           label="确认密码"
-          name="confirmPassword"
+          name="confirmPassword  "
           rules={[
             {
               required: true,
               message: '请再次输入密码',
             },
+            validateConfirm
           ]}
         >
           <Input.Password />
