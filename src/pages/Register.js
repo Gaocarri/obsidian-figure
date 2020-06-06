@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
 import styled from 'styled-components'
+import { useStores } from '../stores'
 
 const Wrapper = styled.div`
   max-width:600px;
@@ -31,8 +32,17 @@ const tailLayout = {
 };
 
 const Component = () => {
+  const { AuthStore } = useStores()
+
   const onFinish = values => {
     console.log('Success:', values);
+    AuthStore.setUsername(values.username)
+    AuthStore.setPassword(values.password)
+    AuthStore.register()
+      .then(() => { console.log('注册成功') })
+      .catch(() => {
+        console.log('注册失败')
+      })
   };
 
   const onFinishFailed = errorInfo => {
@@ -42,8 +52,8 @@ const Component = () => {
   // 验证用户名
   const validateUsername = (rule, value) => {
     if (/\W/.test(value)) return Promise.reject('只能是数字，字母，下划线')
-    if (value.length < 4 || value.length > 10) return Promise.reject('长度为4~10个字符')
-    Promise.resolve()
+    if (value.length < 4 || value.length > 12) return Promise.reject('长度为4~12个字符')
+    return Promise.resolve()
   }
   // 确认密码
   const validateConfirm = ({ getFieldValue }) => ({
@@ -91,8 +101,8 @@ const Component = () => {
               message: '最少4个字符'
             },
             {
-              max: 10,
-              message: '最大10个字符'
+              max: 12,
+              message: '最大12个字符'
             }
           ]}
         >

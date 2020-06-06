@@ -25,7 +25,7 @@ const Auth = {
         // 登录成功
         resolve(loginedUser)
       }, error => {
-        resolve(JSON.stringify(error));
+        reject(JSON.stringify(error));
       });
     })
   },
