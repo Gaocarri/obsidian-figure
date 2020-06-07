@@ -9,7 +9,7 @@ const Home = observer(() => {
 
   return (
     <>
-      <Tips>请先登录在上传</ Tips>
+      <Tips>请先登录再上传</ Tips>
       <Uploader />
     </>)
 })

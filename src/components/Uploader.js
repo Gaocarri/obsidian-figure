@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useStores } from '../stores'
 import { observer, useLocalStore } from 'mobx-react'
-import { Upload, message } from 'antd';
+import { Upload, message, Spin } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import styled from 'styled-components'
 
@@ -66,14 +66,24 @@ const Component = observer(() => {
       ImageStore.setFile(file)
       ImageStore.setFilename(file.name)
       if (!UserStore.currentUser) {
-        console.log('hi')
         message.warning('请先登录再上传!')
         return false
       }
+      window.file = file
+      if (!/(svg$)|(png$)|(jpg$)|(jpeg$)|(gif$)/ig.test(file.type)) {
+        message.error('只能上传svg/png/jpg/gif格式的图片')
+        return false
+      }
+
+      if (file.size > 1024 * 1024) {
+        message.error('图片最大1M')
+        return false
+      }
+
       ImageStore.upload()
         .then((serverFile) => {
-          console.log('上传成功')
           console.log(serverFile)
+          message.success('上传成功')
         })
         .catch(err => {
           console.log('上传失败')
@@ -85,16 +95,17 @@ const Component = observer(() => {
 
   return (
     <div>
-      <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
+      <Spin tip='正在用力上传' spinning={ImageStore.isUploading}>
+        <Dragger {...props}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">点击或者拖拽上传图片</p>
+          <p className="ant-upload-hint">
+            支持上传png/gif/jpg/svg格式的图片,图片最大1M
         </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-          band files
-        </p>
-      </Dragger>
+        </Dragger>
+      </Spin>
       {
         ImageStore.serverFile ?
           <Result>
@@ -123,7 +134,7 @@ const Component = observer(() => {
           </Result>
           : null
       }
-    </div>
+    </div >
   )
 })
 

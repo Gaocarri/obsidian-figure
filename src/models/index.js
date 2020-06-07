@@ -51,8 +51,27 @@ const UpLoader = {
         reject(err)
       })
     })
+  },
+  find(page = 0, limit = 10) {
+    const query = new AV.Query('Image')
+    // 同时查询owner
+    query.include('owner')
+    // 按时间降序排列
+    query.descending('createdAt')
+    // 最大限制
+    query.limit(limit)
+    // 跳过前...
+    query.skip(page * limit)
+    // owner为当前用户的
+    query.equalTo('owner', AV.User.current())
+    return new Promise((resolve, reject) => {
+      query.find()
+        .then(results => resolve(results))
+        .catch(error => reject(error))
+    })
   }
 }
+
 
 export {
   Auth,
