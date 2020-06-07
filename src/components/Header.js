@@ -59,7 +59,7 @@ const Component = observer(() => {
     <nav>
       <StyledLink to="/" exact activeClassName="active">首页</StyledLink>
       <StyledLink to="/history">历史</StyledLink>
-      <StyledLink to="/about">关于我</StyledLink>
+      <StyledLink to="/about">关于</StyledLink>
     </nav>
     <Login>
       {

@@ -11,12 +11,4 @@ const context = createContext({
   HistoryStore
 });
 
-// 记得删除
-window.stores = {
-  AuthStore,
-  UserStore,
-  ImageStore,
-  HistoryStore
-}
-
 export const useStores = () => useContext(context)
