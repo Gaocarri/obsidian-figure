@@ -52,7 +52,7 @@ const UpLoader = {
       })
     })
   },
-  find(page = 0, limit = 10) {
+  find({ page = 0, limit = 10 }) {
     const query = new AV.Query('Image')
     // 同时查询owner
     query.include('owner')
