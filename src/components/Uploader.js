@@ -113,7 +113,7 @@ const Component = observer(() => {
               <dt>
                 线上地址:
             </dt>
-              <dd><A target="_blank" href={ImageStore.serverFile.attributes.url.attributes.url}>ImageStore.serverFile.attributes.url.attributes.url</A></dd>
+              <dd><A target="_blank" href={ImageStore.serverFile.attributes.url.attributes.url}>{ImageStore.serverFile.attributes.url.attributes.url}</A></dd>
 
               <dt>文件名称:</dt>
               <dd>{ImageStore.filename}</dd>

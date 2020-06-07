@@ -2,6 +2,7 @@
   "name": "obsidian-figure",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@babel/core": "7.9.0",
     "@babel/helper-create-regexp-features-plugin": "^7.10.1",
