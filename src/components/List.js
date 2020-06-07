@@ -9,11 +9,17 @@ const Img = styled.img`
   width:100px;
   height:120px;
   object-fit:contain;
-  border:1px solid #eee;
+  border:none;
 `
 
 const A = styled.a`
   color:blue;
+`
+
+const StyledListItem = styled(List.Item)`
+  background-color:#FAFAFA;
+  margin-bottom:40px;
+  padding:20px 40px;
 `
 
 const Component = observer(() => {
@@ -39,7 +45,7 @@ const Component = observer(() => {
         <List
           dataSource={HistoryStore.list}
           renderItem={
-            item => <List.Item style={{ borderBottom: '1px solid #ddd' }} key={item.id}>
+            item => <StyledListItem key={item.id}>
               <div>
                 <Img src={item.attributes.url.attributes.url} />
               </div>
@@ -49,9 +55,9 @@ const Component = observer(() => {
               </div>
 
               <div>
-                <A target="_blank" href={item.attributes.url.attributes.url}>item.attributes.url.attributes.url</A>
+                <A target="_blank" href={item.attributes.url.attributes.url}>{item.attributes.url.attributes.url}</A>
               </div>
-            </List.Item>
+            </StyledListItem>
           }
         >
           {HistoryStore.isLoading && HistoryStore.hasMore && (

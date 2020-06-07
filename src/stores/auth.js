@@ -28,7 +28,7 @@ class AuthStore {
         })
         .catch(err => {
           UserStore.resetUser()
-          message.error('登陆失败' + err)
+          message.error('登陆失败，' + JSON.parse(err).rawMessage)
           reject(err);
         })
     })
@@ -43,7 +43,7 @@ class AuthStore {
       })
         .catch(err => {
           UserStore.resetUser()
-          message.error('注册失败' + err)
+          message.error('注册失败,' + err)
           reject(err);
         })
     })

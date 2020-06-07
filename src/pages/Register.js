@@ -37,7 +37,6 @@ const Component = () => {
   const history = useHistory()
 
   const onFinish = values => {
-    console.log('Success:', values);
     AuthStore.setUsername(values.username)
     AuthStore.setPassword(values.password)
     AuthStore.register()
@@ -45,12 +44,11 @@ const Component = () => {
         history.replace('/')
       })
       .catch(() => {
-        console.log('注册失败')
       })
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+
   };
 
   // 验证用户名

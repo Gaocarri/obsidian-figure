@@ -5,13 +5,17 @@ const Footer = styled.footer`
   padding:10px 100px;
   text-align:center;
   font-size:12px;
-  color:#aaa;
+  background-color:#02101f;
+  color:#fff;
+`
+const Span = styled.span`
+  color:#ccc
 `
 
 function Component() {
   return (<>
     <Footer>
-      <h1>Footer</h1>
+      <Span>Copyright © 2020 黑曜石图床 Powered by GaoCarri</Span>
     </Footer>
   </>)
 }

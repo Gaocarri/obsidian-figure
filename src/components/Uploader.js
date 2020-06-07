@@ -15,11 +15,12 @@ const Result = styled.div`
 
 const H1 = styled.h1`
 margin:20px 0;
-text-align:center
+text-align:center;
 `
 
 const Image = styled.img`
-  max-width:300px
+  max-width:300px;
+  border:none;
 `
 
 const A = styled.a`
@@ -82,12 +83,10 @@ const Component = observer(() => {
 
       ImageStore.upload()
         .then((serverFile) => {
-          console.log(serverFile)
           message.success('上传成功')
         })
         .catch(err => {
-          console.log('上传失败')
-          console.log(err)
+          message.error('上传失败,服务器出问题了')
         })
       return false;
     }
@@ -112,17 +111,17 @@ const Component = observer(() => {
             <H1>上传结果</H1>
             <dl>
               <dt>
-                线上地址
+                线上地址:
             </dt>
               <dd><A target="_blank" href={ImageStore.serverFile.attributes.url.attributes.url}>ImageStore.serverFile.attributes.url.attributes.url</A></dd>
 
-              <dt>文件名称</dt>
+              <dt>文件名称:</dt>
               <dd>{ImageStore.filename}</dd>
 
-              <dt>图片预览</dt>
+              <dt>图片预览:</dt>
               <dd><Image src={ImageStore.serverFile.attributes.url.attributes.url} alt={ImageStore.filename} /></dd>
 
-              <dt>更多尺寸</dt>
+              <dt>更多尺寸:</dt>
               <dd>
                 <input onChange={bindWidthChange} placeholder="最大宽度(可选)" ref={ref1} style={{ marginRight: '20px' }} />
                 <input onChange={bindHeightChange} placeholder="最大高度(可选)" ref={ref2} />

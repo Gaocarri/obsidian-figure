@@ -24,7 +24,6 @@ class ImageStore {
           resolve(serverFile)
         })
         .catch(err => {
-          console.log('上传失败')
           message.error('上传失败')
           reject(err)
         })
