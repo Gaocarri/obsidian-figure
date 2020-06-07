@@ -37,11 +37,13 @@ const StyledButton = styled(Button)`
 
 const Component = observer(() => {
 
-  const { UserStore, AuthStore } = useStores()
+  const { UserStore, AuthStore, ImageStore, HistoryStore } = useStores()
   const history = useHistory()
 
   const handleLogout = () => {
     AuthStore.logout()
+    ImageStore.reset()
+    HistoryStore.reset()
   }
 
   const handleLogin = () => {

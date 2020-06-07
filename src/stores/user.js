@@ -2,7 +2,7 @@ import { observable, action } from 'mobx'
 import { Auth } from '../models'
 
 class UserStore {
-  @observable currentUser = null
+  @observable currentUser = Auth.getCurrentUser()
 
   @action pullUser() {
     this.currentUser = Auth.getCurrentUser()

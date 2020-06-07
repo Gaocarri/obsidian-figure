@@ -15,10 +15,11 @@ class HistoryStore {
 
   @action find() {
     this.isLoading = true
-    UpLoader.find({ page: this.page, limit: this.limit })
+    UpLoader.find({ page: this.page, limit: 10 })
       .then(newList => {
+        this.page += 1
         this.append(newList)
-        if (newList.length < this.limit) {
+        if (newList.length < 10) {
           this.hasMore = false
         }
       })
@@ -30,6 +31,12 @@ class HistoryStore {
       })
   }
 
+  @action reset() {
+    this.list = []
+    this.isLoading = false
+    this.hasMore = true
+    this.page = 0
+  }
 }
 
 export default new HistoryStore()
